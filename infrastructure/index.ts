@@ -59,6 +59,16 @@ const originBucket = pulumi.output(aws.s3.getBucket({
     bucket: originBucketName,
 }));
 
+// Add a fallback bucket that matches the domain name (for use with S3).
+const fallbackBucket = new aws.s3.Bucket("fallback-bucket", {
+    bucket: config.websiteDomain,
+    acl: aws.s3.CannedAcl.PublicRead,
+    website: {
+        indexDocument: "index.html",
+        errorDocument: "404.html",
+    },
+}, { protect: true });
+
 // Create a bucket to store files we do not keep in source control.
 const uploadsBucket = new aws.s3.Bucket("uploads-bucket", {
     acl: aws.s3.PublicReadAcl,
