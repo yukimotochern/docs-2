@@ -48,7 +48,7 @@ build:
 check_links:
 	$(MAKE) banner
 	$(MAKE) ensure
-	./scripts/link-checker/check-links.sh "https://www.pulumi.com"
+	./scripts/link-checker/check-links.sh "https://dpi2l9vjcb77t.cloudfront.net"
 
 .PHONY: new_learn_module
 new_learn_module:
