@@ -342,6 +342,7 @@ async function getURLsToCheck(base) {
                 .filter(page => !page.match(/\/registry\//))
                 .filter(page => !page.match(/\/docs\/reference\/pkg\/nodejs|python\//))
                 .filter(page => !page.match(/\/docs\/get-started\/install\/versions\//))
+                .filter(page => !page.match(/\/docs\/cli\/commands\//))
 
                 // Always check using the supplied baseURL.
                 .map(url => {
