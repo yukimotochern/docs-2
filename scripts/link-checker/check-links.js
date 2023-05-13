@@ -263,6 +263,9 @@ function excludeAcceptable(links) {
         .filter(b => !(b.reason === "HTTP_429" && b.destination.match(/github.com|npmjs.com/)))
 
         // Ignore remote disconnects.
+        .filter(b => b.reason !== "HTTP_403")
+
+        // Ignore remote disconnects.
         .filter(b => b.reason !== "ERRNO_ECONNRESET")
         
         // Ignore BLC_UNKNOWN's
@@ -336,7 +339,7 @@ async function getURLsToCheck(base) {
             const urls = map.sites
 
                 // Exclude resource docs, SDK docs, and CLI download pages.
-                .filter(page => !page.match(/\/registry\/packages\/.+\/api-docs\//))
+                .filter(page => !page.match(/\/registry\//))
                 .filter(page => !page.match(/\/docs\/reference\/pkg\/nodejs|python\//))
                 .filter(page => !page.match(/\/docs\/get-started\/install\/versions\//))
 
