@@ -48,7 +48,7 @@ build:
 check_links:
 	$(MAKE) banner
 	$(MAKE) ensure
-	./scripts/link-checker/check-links.sh "http://pulumi-hugo-origin-pr-2769-afdfe5b9.s3-website.us-west-2.amazonaws.com"
+	./scripts/link-checker/check-links.sh "http://pulumi-hugo-origin-pr-3015-0be611ef.s3-website.us-west-2.amazonaws.com"
 
 .PHONY: new_learn_module
 new_learn_module:
