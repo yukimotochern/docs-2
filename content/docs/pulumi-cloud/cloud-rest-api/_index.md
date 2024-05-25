@@ -781,12 +781,29 @@ GET /api/stacks/{organization}/{project}/{stack}/update/{updateID}/events
 
 #### Parameters
 
-| Parameter      | Type   | In   | Description                                                                                               |
-|----------------|--------|------|-----------------------------------------------------------------------------------------------------------|
-| `organization` | string | path | organization name                                                                                         |
-| `project`      | string | path | project name                                                                                              |
-| `stack`        | string | path | stack name                                                                                                |
-| `updateID`     | uuid   | path | update id - UUID as retrieved from [List Stack Updates](#list-stack-updates) using `?output-type=service` |
+| Parameter           | Type   | In   | Description                                                                                                 |
+|---------------------|--------|------|-------------------------------------------------------------------------------------------------------------|
+| `organization`      | string | path | organization name                                                                                           |
+| `project`           | string | path | project name                                                                                                |
+| `stack`             | string | path | stack name                                                                                                  |
+| `updateID`          | uuid   | path | update id - UUID as retrieved from [List Stack Updates](#list-stack-updates) using `?output-type=service`   |
+| `urn`               | string | query | Optional. If a URN is provided, filter events just related to that resource                                |
+| `type`              | string | query | Optional. Filter results to only certain types of events. Can be provided multiple times to request several event types. |
+| `continuationToken` | string | query | Optional. the continuation token to use for retrieving the next set of results if results were truncated   |
+
+The optional `type` parameter represents a type of engine events.  It is specified by an integer corresponding to one of the event types from the following set:
+
+*	`Cancel` event (`1`)
+* `Stdout` event (`2`)
+* `Diagnostic` event (`3`)
+* `Prelude` event (`4`)
+* `Summary` event (`5`)
+* `ResourcePre` event (`6`)
+* `ResOutputs` event (`7`)
+* `ResOpFailed` event (`8`)
+* `Policy` event (`9`)
+* `PolicyRemediation` event (`10`)
+* `PolicyLoad` event (`11`)
 
 #### Example
 
