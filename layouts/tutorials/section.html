@@ -1,17 +1,28 @@
 {{ define "main" }}
-    <div class="p-8">
-        <div class="flex">
-            <div class="w-2/12 my-2">
+<div div class="docs-list-main">
+    <div class="docs-main-nav-toggle-wrapper">
+        <div class="docs-main-nav-wrapper">
+            <div id="docs-main-nav" class="docs-main-nav">
+
                 <h5>Tutorials by cloud provider</h5>
                 <ul>
                     {{ range $slug := (slice "aws" "azure" "gcp" "kubernetes" "docker") }}
-                        {{ $provider := index (where $.Site.Data.tutorials.providers "slug" $slug) 0 }}
-                        <li><a href="/tutorials/{{ $slug }}">{{ $provider.shortname }} tutorials</a></li>
+                    {{ $provider := index (where $.Site.Data.tutorials.providers "slug" $slug) 0 }}
+                    <li><a href="/tutorials/{{ $slug }}">{{ $provider.shortname }} tutorials</a></li>
                     {{ end }}
                 </ul>
-
             </div>
-            <div class="tutorials-main w-7/12">
+        </div>
+        <div class="docs-nav-toggle">
+            <div class="docs-nav-toggle-icon icon icon-24-24"></div>
+        </div>
+    </div>
+
+    <div class="docs-main-content-wrapper">
+
+        <div class="docs-main-content">
+            <div class="tutorials-main">
+
                 <h1>{{ .Title }}</h1>
                 <div>{{ .Content }}</div>
 
@@ -21,13 +32,15 @@
                         {{ range $slug := (slice "aws" "azure" "gcp" "kubernetes") }}
                         {{ $provider := index (where $.Site.Data.tutorials.providers "slug" $slug) 0 }}
                         <li class="md:w-1/2 p-4 border border-gray-200 w-full">
-                            <div class="card-heading"> 
+                            <div class="card-heading">
                                 <h3>{{ $provider.shortname }} Tutorials</h3>
-                                <img src="{{ $provider.logo }}"/>
+                                <img src="{{ $provider.logo }}" />
                             </div>
                             <ul class="list-none p-0">
-                                <li><a href="/docs/clouds/{{ $slug }}/get-started/">Get started {{ $provider.shortname }}</a></li>
-                                <li><a href="/tutorials/{{ $slug }}">Browse all {{ $provider.shortname }} tutorials</a></li>
+                                <li><a href="/docs/clouds/{{ $slug }}/get-started/">Get started {{ $provider.shortname
+                                        }}</a></li>
+                                <li><a href="/tutorials/{{ $slug }}">Browse all {{ $provider.shortname }} tutorials</a>
+                                </li>
                             </ul>
                         </li>
                         {{ end }}
@@ -60,11 +73,12 @@
                     </ul>
                 </div>
             </div>
-            <div class="w-3/12">
+        </div>
+        <div class="w-3/12">
 
-            </div>
         </div>
     </div>
+</div>
 {{ end }}
 
 {{ define "footer" }}
