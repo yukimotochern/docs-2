@@ -11,45 +11,54 @@
                 </ul>
 
             </div>
-            <div class="w-7/12">
+            <div class="tutorials-main w-7/12">
                 <h1>{{ .Title }}</h1>
                 <div>{{ .Content }}</div>
 
-                <h2>Tutorials by cloud provider</h2>
-                <ul class="flex flex-col md:flex-row md:flex-wrap list-none p-0">
-                    {{ range $slug := (slice "aws" "azure" "gcp" "kubernetes") }}
+                <div class="tutorials-clouds">
+                    <h2>Tutorials by cloud provider</h2>
+                    <ul class="flex flex-col md:flex-row md:flex-wrap list-none p-0">
+                        {{ range $slug := (slice "aws" "azure" "gcp" "kubernetes") }}
                         {{ $provider := index (where $.Site.Data.tutorials.providers "slug" $slug) 0 }}
                         <li class="md:w-1/2 p-4 border border-gray-200 w-full">
-                            <h3>{{ $provider.name }} Tutorials</h3>
+                            <div class="card-heading"> 
+                                <h3>{{ $provider.shortname }} Tutorials</h3>
+                                <img src="{{ $provider.logo }}"/>
+                            </div>
                             <ul class="list-none p-0">
-                                <li><a href="/docs/clouds/{{ $slug }}/get-started/">Get started with Pulumi and {{ $provider.name }}</a></li>
-                                <li><a href="/tutorials/{{ $slug }}">Browse all {{ $provider.name }} tutorials</a></li>
+                                <li><a href="/docs/clouds/{{ $slug }}/get-started/">Get started {{ $provider.shortname }}</a></li>
+                                <li><a href="/tutorials/{{ $slug }}">Browse all {{ $provider.shortname }} tutorials</a></li>
                             </ul>
                         </li>
-                    {{ end }}
-                </ul>
+                        {{ end }}
+                    </ul>
+                </div>
 
-                <h3>Tutorials by topic</h3>
-                <ul class="flex flex-col md:flex-row md:flex-wrap list-none p-0">
-                    {{ range $taxonomy, $terms := .Site.Taxonomies.collections }}
+                <div class="tutorials-topics">
+                    <h2>Tutorials by topic</h2>
+                    <ul class="flex flex-col md:flex-row md:flex-wrap list-none p-0">
+                        {{ range $taxonomy, $terms := .Site.Taxonomies.collections }}
                         {{ $collection := index (where $.Site.Data.tutorials.collections "slug" $taxonomy) 0 }}
                         <li class="md:w-1/3 p-4 border border-gray-200 w-full">
-                            <h4><a href="/tutorials/{{ $taxonomy }}">{{ $collection.name }}</a></h4>
+                            <h3><a href="/tutorials/{{ $taxonomy }}">{{ $collection.name }}</a></h3>
                             <p>{{ $collection.description }}</p>
                             <p>{{ len $terms }} topics</p>
                         </li>
-                    {{ end }}
-                </ul>
+                        {{ end }}
+                    </ul>
+                </div>
 
-                <h3>All tutorials</h3>
-                <ul class="flex flex-col md:flex-row md:flex-wrap list-none p-0">
-                    {{ range .Pages }}
+                <div class="tutorials-all">
+                    <h2>All tutorials</h2>
+                    <ul class="flex flex-col md:flex-row md:flex-wrap list-none p-0">
+                        {{ range .Pages }}
                         <li class="md:w-1/3 p-4 border border-gray-200 w-full">
-                            <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
+                            <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
                             <p>{{ .Description }}</p>
                         </li>
-                    {{ end }}
-                </ul>
+                        {{ end }}
+                    </ul>
+                </div>
             </div>
             <div class="w-3/12">
 

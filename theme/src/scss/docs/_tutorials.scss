@@ -1,0 +1,63 @@
+.tutorials-main {
+    .tutorials-clouds {
+        > h2 {
+            font-size: 24px !important;
+        }
+        > h3 {
+            font-size: 21px !important;
+        }
+
+        font-family: 'Gilroy';
+        
+        > ul {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: 100%;
+            > li {
+                flex-basis: 48%;
+                height: 222px;     
+                
+                .card-heading {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: flex-start;
+                    h3 {
+                        flex-grow: 1;
+                    }
+                    img {
+                        width: 24px;
+                        height: 24px;
+                    }
+                }
+
+                > ul {
+                    > li {
+                        padding: 12px 24px 12px 24px;
+                        gap: 6px;
+                        border-radius: 4px 0px 0px 0px;
+                        border: 1px 0px 0px 0px;
+                        opacity: 0px;
+                        border: 1px solid #DCDCDC;
+                        > a {
+                            font-family: Gilroy;
+                            font-size: 18px;
+                            font-weight: 500;
+                            line-height: 36px;
+                            text-align: left;
+                            color: #5F6065;
+                        }
+                    }
+                }
+                border-radius: 4px;
+                background: linear-gradient(121deg, #F6F7FD 0%, #F9F7FC 5.24%, #F9F5FA 9.77%, #FEF8F9 14.35%, #FFFDF7 17.83%, #FFF 22.11%, #FFF 79.52%, #FFFDF7 86.29%, #FEF8F9 89.41%, #F9F5FA 92.9%, #F9F7FC 96.56%, #F6F7FD 100%, #F6F7FD 100%), #FFF;
+                box-shadow: 0px 2px 24px 0px rgba(95, 96, 101, 0.14);
+            }
+            padding: 12px 24px 12px 24px;
+            gap: 12px;
+            border-radius: 4px 0px 0px 0px;
+            border: 1px 0px 0px 0px;
+            opacity: 0px;
+        }
+    }
+}
