@@ -1,6 +1,5 @@
 <nav class="main-nav">
-    {{ if hasPrefix .RelPermalink "/tutorials/" }}
-        {{/* Render a top-level menu for our major docs sections */}}
+    {{ if hasSuffix .RelPermalink "/tutorials/" }}
         {{ $toc_page := . }}
         {{ $toc_sections := slice "Tutorials by cloud provider" "Tutorials by topic" "All tutorials" }}
         {{ $toc_menus := dict "Tutorials by cloud provider" .Site.Data.tutorials.providers "Tutorials by topic" .Site.Data.tutorials.topics }}
@@ -44,7 +43,42 @@
                 {{ template "toc-tutorials" (dict "page" $toc_page "menu" $toc_menu) }}
             </div>
         {{ end }}
+    {{ else }}
+        {{ $toc_name := .Scratch.Get "title" }}
+        {{ $layout_type := .Scratch.Get "layout"}}
+        {{ $sidenav_selected := "" }}
+        {{ $toggle_state := "toggle" }}
+        {{ $toggle_class := "toggle" }}
+        {{ if ne $layout_type "topic" }}
+            <div id="toc-menu-{{ $toc_name }}" class="{{ $sidenav_selected }} text-black no-anchor toc-header toggle-topLevel {{ $toggle_class }}" id="{{ $toc_name | urlize }}-toc-header">
+                <a>{{ $toc_name }}</a>
+            </div>
+            {{ range .Pages }}
+            <div class="sidenav-subsection">
+                <ul class="collapsed">
+                    <li class="sidenav-topic">
+                        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                    </li>
+                </ul>
+            </div>
+            {{ end }}
+        {{ else }}
+            <div id="toc-menu-{{ $toc_name }}" class="{{ $sidenav_selected }} text-black no-anchor toc-header toggle-topLevel {{ $toggle_class }}" id="{{ $toc_name | urlize }}-toc-header">
+                <a>{{ .Parent.Title }}</a>
+            </div>
+            {{ range .Parent.Pages }}
+            <div class="sidenav-subsection">
+                <ul class="collapsed">
+                    <li class="sidenav-topic">
+                        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                    </li>
+                </ul>
+            </div>
+            {{ end }}
+        {{ end }}
+        
     {{ end }}
+    
 
     {{ define "toc-tutorials" }}
         {{ $page := .page }}
@@ -74,7 +108,7 @@
                         </li>
                         {{ if .HasChildren }}
                             <div class="sidenav-subsection">
-                                {{ template "toc" (dict "page" $page "menu" .Children) }}
+                                {{ template "toc-tutorials" (dict "page" $page "menu" .Children) }}
                             </div>
                         {{ end }}
                     </ul>
