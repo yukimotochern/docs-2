@@ -17,6 +17,9 @@
         <div class="docs-main-content">
             This is the module layout template.
             <div class="tutorials-main">
+                <header>
+                    {{ partial "templates/breadcrumb.html" . }}
+                </header>
                 <div class="special-h1">
                     <h1>{{ .Title }}</h1>
                     <div class="h1-gradient"></div>
@@ -26,14 +29,26 @@
 
                 <div class="module-list">
                     <h2>Tutorials</h2>
-                    <ul class="flex flex-col md:flex-col md:flex-wrap list-none p-0">
-                        {{ range .Pages }}
-                        <li class="md:w-1/2 p-4 border border-gray-200 w-full">
-                            <div class="card-heading">
-                                <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-                            </div>
-                            <p>{{ .Description }}</p>
-                        </li>
+                    <ul class="p-0 border-4 border-gray-100 rounded">
+                        {{ range $index, $page := .Pages }}
+                            <li
+                                class="flex items-center list-none py-3 px-4 border-gray-200
+                                {{ if lt (add $index 1) (len .Pages) }}border-b{{ end }}
+                                "
+                            >
+                                <span class="w-full">
+                                    <a href="{{ .RelPermalink }}">{{ $page.Title }}</a>
+                                </span>
+                                <span class="text-sm text-gray-600 whitespace-nowrap mx-12">
+                                    <i class="fas fa-stopwatch text-center w-6 text-gray-500"></i>
+                                    {{ $page.Params.estimated_time }} minutes
+                                </span>
+                                <span>
+                                    <a href="{{ .RelPermalink }}">
+                                        <i class="fas fa-chevron-circle-right text-blue-600 p-2"></i>
+                                    </a>
+                                </span>
+                            </li>
                         {{ end }}
                     </ul>
                 </div>
