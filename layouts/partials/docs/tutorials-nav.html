@@ -1,7 +1,7 @@
 <nav class="main-nav">
     {{ if hasSuffix .RelPermalink "/tutorials/" }}
         {{ $toc_page := . }}
-        {{ $toc_sections := slice "Tutorials by cloud provider" "Tutorials by topic" "All tutorials" }}
+        {{ $toc_sections := slice "Tutorials by cloud provider" "Tutorials by topic" }}
         {{ $toc_menus := dict "Tutorials by cloud provider" .Site.Data.tutorials.providers "Tutorials by topic" .Site.Data.tutorials.topics }}
 
         {{ range $index, $element := $toc_sections }}
@@ -10,15 +10,6 @@
             {{ $toc_menu := (index $toc_menus $toc_name) }}
 
             {{ $toc_section_link := "" }}
-            {{ range $toc_menu }}
-                {{ if (eq .Name "Overview") }}
-                    {{ $toc_section_link = .URL }}
-                {{ end }}
-            {{ end }}
-
-            {{ if (eq $.Page.RelPermalink $toc_section_link) }}
-                {{ $sidenav_selected = "active" }}
-            {{ end }}
 
             {{ $toggle_class := "toggle" }}
             {{ if or (hasPrefix $.Page.RelPermalink $toc_section_link) (eq $toc_name "Clouds") }}
@@ -29,14 +20,12 @@
             {{ end }}
             <div id="toc-menu-{{ $toc_name }}" class="{{ $sidenav_selected }} text-black no-anchor toc-header toggle-topLevel {{ $toggle_class }}" id="{{ $toc_name | urlize }}-toc-header">
                 <a href="{{ $toc_section_link }}">{{ $toc_name }}</a>
-                {{ if and ($toc_section_link) (ne $toc_name "Get started") }}
-                    <span class="toggleButton-topLevel down">
-                        <div class="icon icon-14-14 keyboard-arrow-down-gray-14-14"></div>
-                    </span>
-                    <span class="toggleButton-topLevel right">
-                        <div class="icon icon-14-14 keyboard-arrow-right-gray"></div>
-                    </span>
-                {{ end }}
+                <span class="toggleButton-topLevel down">
+                    <div class="icon icon-14-14 keyboard-arrow-down-gray-14-14"></div>
+                </span>
+                <span class="toggleButton-topLevel right">
+                    <div class="icon icon-14-14 keyboard-arrow-right-gray"></div>
+                </span>
             </div>
 
             <div class="top-level-container">
@@ -52,6 +41,12 @@
         {{ if ne $layout_type "topic" }}
             <div id="toc-menu-{{ $toc_name }}" class="{{ $sidenav_selected }} text-black no-anchor toc-header toggle-topLevel {{ $toggle_class }}" id="{{ $toc_name | urlize }}-toc-header">
                 <a>{{ $toc_name }}</a>
+                <span class="toggleButton-topLevel down">
+                    <div class="icon icon-14-14 keyboard-arrow-down-gray-14-14"></div>
+                </span>
+                <span class="toggleButton-topLevel right">
+                    <div class="icon icon-14-14 keyboard-arrow-right-gray"></div>
+                </span>
             </div>
             {{ range .Pages }}
             <div class="sidenav-subsection">
@@ -85,11 +80,11 @@
 
         {{ range .menu }}
                 {{ $toggle_state := "toggle" }}
-                {{ $filepath := .URL }}
+                {{ $filepath := .menu }}
                 <ul id="toc-expandable-menu{{ replace $filepath "/" "-" }}" class="{{ $toggle_state }}">
                     <ul class="collapsed">
                         <li class="sidenav-topic">
-                                <a href="{{ .URL }}" data-track="toc-{{ .shortname | urlize }}">{{ .shortname }} tutorials</a>
+                                <a href="/tutorials/{{ .slug }}" data-track="toc-{{ .shortname | urlize }}">{{ .shortname }} tutorials</a>
                             {{ if .HasChildren }}
                                 <span class="toggleButton">
                                     <div class="icon icon-14-14 keyboard-arrow-right-gray"></div>
