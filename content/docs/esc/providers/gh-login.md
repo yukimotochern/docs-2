@@ -27,9 +27,9 @@ To use the provider, you must register a new GitHub App into your personal GitHu
 Other GitHub accounts then install the application into their account to grant access to you, with the permissions
 defined by your GitHub App.
 
-- To register an app on a personal account, visit: [https://github.com/settings/apps/new](https://github.com/settings/apps/new?webhook_active=false&description=Enables%20access%20for%20a%20Pulumi%20ESC%20environment.&url=https://www.pulumi.com/product/esc/).
+- To register an app on a personal account, visit: [https://github.com/settings/apps/new](https://github.com/settings/apps/new?contents=read&metadata=read&webhook_active=false&description=Enables%20access%20for%20a%20Pulumi%20ESC%20environment.&url=https://www.pulumi.com/product/esc/).
 
-- To register an app on an organization account, visit: [https://github.com/organizations/ORGANIZATION/settings/apps/new](?webhook_active=false&description=Enables%20access%20for%20a%20Pulumi%20ESC%20environment.&url=https://www.pulumi.com/product/esc/).
+- To register an app on an organization account, visit: [https://github.com/organizations/ORGANIZATION/settings/apps/new](https://github.com/organizations/ORGANIZATION/settings/apps/new?contents=read&metadata=read&webhook_active=false&description=Enables%20access%20for%20a%20Pulumi%20ESC%20environment.&url=https://www.pulumi.com/product/esc/).
 Replace ORGANIZATION with the name of the organization where you'd like to register the app.
 
 It is fine to deploy a separate GitHub app for each Pulumi environment, or to reuse an app across environments.
@@ -78,7 +78,7 @@ repositories:
 
 ### GitHub Enterprise Server
 
-To access a GitHub Enterprise Server, configure the `ghe.host` input to your server address.
+To access a GitHub Enterprise Server, configure the `ghe.host` property to your server address.
 
 ```yaml
 ghe:
