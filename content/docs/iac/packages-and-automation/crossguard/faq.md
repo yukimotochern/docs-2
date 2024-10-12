@@ -48,7 +48,7 @@ During `pulumi refresh`, no resources are modified. This command updates the sta
 
 ## What happens if I add a Policy Pack that causes an existing resource to become out-of-compliance?
 
-The next preview or update of the stack with fail due to the policy violation. The stack will need to be fixed before it can be updated.
+The next preview or update of the stack will fail due to the policy violation. The stack will need to be fixed before it can be updated.
 
 A stack with out-of-compliance resources can be destroyed.
 
